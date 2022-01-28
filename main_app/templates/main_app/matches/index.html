@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <hr />
+    {% for match in matches %}
+
+        <a href="/matches/{{match.id}}">
+            <p>Name: {{ match.match }}</p>
+        </a>
+        <hr />
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h2>solo/duo: {{ rank.solo_duo_rank }}</h2>
+    <h2>flex: {{ rank.flex_rank }}</h2>
+
+    <a href="{% url 'ranks_update' rank.id %}">Update Details</a>
+    <a href="{% url 'ranks_delete' rank.id %}">DELETE This Rank</a>
+
+    <hr>
+
+{% endblock %}

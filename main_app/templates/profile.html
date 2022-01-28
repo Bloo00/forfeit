@@ -7,5 +7,14 @@
         <a href="/cats/{{cat.id}}">
             <h3>{{ cat.name }}</h3>
         </a>
+        <a href="/ranks/{{rank.id}}">
+            <h3>{{ rank.solo_duo_rank }}</h3>
+        </a>
+        <a href="/matches/{{match.id}}">
+            <h3>{{ match.summoner_name }}</h3>
+        </a>
+        <a href="/summoners/{{summoner.id}}">
+            <h3>{{ summoner.summoner_name }}</h3>
+        </a>
     {% endfor %}
 {% endblock %}

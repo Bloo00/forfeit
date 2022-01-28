@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h2>Name: {{match.summoner_name}}</h2>
+
+    <a href="{% url 'matches_update' match.id %}">Update Details</a>
+    <a href="{% url 'matches_delete' match.id %}">DELETE This match</a>
+
+    <hr>
+
+{% endblock %}

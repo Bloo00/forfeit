@@ -73,7 +73,7 @@ class CatCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/cats')
 
-###
+### Summoner
 @method_decorator(login_required, name='dispatch')
 class SummonerCreate(CreateView):
     model = Summoner
@@ -87,6 +87,33 @@ class SummonerCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect("/summoners")
 
+### Match
+@method_decorator(login_required, name='dispatch')
+class MatchCreate(CreateView):
+    model = Match
+    fields = '__all__'
+    success_url = "/matches/"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print("self.object: ",self.object)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect("/matches")
+
+### Rank
+@method_decorator(login_required, name='dispatch')
+class RankCreate(CreateView):
+    model = Rank
+    fields = '__all__'
+    success_url = "/ranks/"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print("self.object: ",self.object)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect("/ranks")
 
 class CatUpdate(UpdateView):
     model = Cat
@@ -97,7 +124,7 @@ class CatUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/cats/'+str(self.object.pk))
 
-###
+### Summoner
 class SummonerUpdate(UpdateView):
     model = Summoner
     fields = ["summoner_name","summoner_lvl","solo_rank","flex_rank","profile_icon"]
@@ -107,27 +134,69 @@ class SummonerUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/summoners/'+str(self.object.pk))
 
+### Match
+class MatchUpdate(UpdateView):
+    model = Match
+    fields = "__all__"
+
+    def form_valid(self, form): # this will allow us to catch the pk to redirect to the show page
+        self.object = form.save(commit=False) # don't post to the db until we say so
+        self.object.save()
+        return HttpResponseRedirect('/matches/'+str(self.object.pk))
+
+### Rank
+class RankUpdate(UpdateView):
+    model = Rank
+    fields = "__all__"
+
+    def form_valid(self, form): # this will allow us to catch the pk to redirect to the show page
+        self.object = form.save(commit=False) # don't post to the db until we say so
+        self.object.save()
+        return HttpResponseRedirect('/ranks/'+str(self.object.pk))
+
 
 class CatDelete(DeleteView):
     model = Cat
     success_url = '/cats'
 
-###
+### Summoner
 class SummonerDelete(DeleteView):
     model = Summoner
     success_url = '/summoners'
+
+### Match
+class MatchDelete(DeleteView):
+    model = Match
+    success_url = '/matches'
+
+### Rank
+class RankDelete(DeleteView):
+    model = Rank
+    success_url = '/ranks'
 
 def cats_index(request):
     # Get all cats from the db
     cats = Cat.objects.all()
     return render(request, 'cats/index.html', {'cats': cats})
 
-###
+### Summoners
 
 def summoners_index(request):
     # Get all cats from the db
     summoners = Summoner.objects.all()
     return render(request, 'summoners/index.html', {'summoners': summoners})
+
+## Match
+def matches_index(request):
+    # Get all cats from the db
+    matches = Match.objects.all()
+    return render(request, 'matches/index.html', {'matches': matches})
+
+## Rank
+def matches_index(request):
+    # Get all cats from the db
+    ranks = Rank.objects.all()
+    return render(request, 'ranks/index.html', {'ranks': ranks})
 
     
 def cats_show(request, cat_id):
@@ -135,12 +204,26 @@ def cats_show(request, cat_id):
     toys = CatToy.objects.all()
     return render(request, 'cats/show.html', {'cat': cat, 'toys': toys})
 
-###
+### Summoner
 
 def summoners_show(request, summoner_id):
     summoner = Summoner.objects.get(id=summoner_id)
-    print("summoner: ", summoner)
     return render(request, 'summoners/show.html', {'summoner': summoner})
+
+### Match
+
+def matches_show(request, match_id):
+    match = Match.objects.get(id=match_id)
+    return render(request, 'matches/show.html', {'match': match})
+
+### Rank
+
+def ranks_show(request, rank_id):
+    rank = Rank.objects.get(id=rank_id)
+    summoner = Summoner.objects.all()
+    return render(request, 'ranks/show.html', {'rank': rank,'summoner':summoner})
+
+
 
 ########## CATTOYS ################
 
