@@ -20,4 +20,11 @@ urlpatterns = [
     path('cattoys/<int:pk>/delete/', views.CatToyDelete.as_view(), name='cattoys_delete'),
     path('cats/<int:cat_id>/assoc_toy/<int:toy_id>', views.associate_toy, name='associate_toy'),
     path('cats/<int:cat_id>/unassoc_toy/<int:toy_id>', views.unassociate_toy, name='unassociate_toy'),
+
+
+    path('summoners/', views.summoners_index, name='summoners_index'),
+    path('summoners/<int:summoner_id>/',views.summoners_show , name='summoners_show'),
+    path('summoners/create/', views.SummonerCreate.as_view(), name='summoners_create'),
+    path('summoners/<int:pk>/update/', views.SummonerUpdate.as_view(), name='summoners_update'),
+    path('summoners/<int:pk>/delete/', views.SummonerDelete.as_view(), name='summoners_delete'),
 ]

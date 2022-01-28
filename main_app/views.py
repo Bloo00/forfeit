@@ -1,5 +1,8 @@
+from curses.ascii import HT
+from dataclasses import field
+from xml.parsers.expat import model
 from django.shortcuts import render, redirect
-from .models import Cat, CatToy
+from .models import Cat, CatToy, Summoner, Match, Rank 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -70,6 +73,21 @@ class CatCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/cats')
 
+###
+@method_decorator(login_required, name='dispatch')
+class SummonerCreate(CreateView):
+    model = Summoner
+    fields = '__all__'
+    success_url = "/summoners/"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print("self.object: ",self.object)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect("/summoners")
+
+
 class CatUpdate(UpdateView):
     model = Cat
     fields = ['name', 'breed', 'description', 'age']
@@ -79,19 +97,50 @@ class CatUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/cats/'+str(self.object.pk))
 
+###
+class SummonerUpdate(UpdateView):
+    model = Summoner
+    fields = ["summoner_name","summoner_lvl","solo_rank","flex_rank","profile_icon"]
+
+    def form_valid(self, form): # this will allow us to catch the pk to redirect to the show page
+        self.object = form.save(commit=False) # don't post to the db until we say so
+        self.object.save()
+        return HttpResponseRedirect('/summoners/'+str(self.object.pk))
+
+
 class CatDelete(DeleteView):
     model = Cat
     success_url = '/cats'
+
+###
+class SummonerDelete(DeleteView):
+    model = Summoner
+    success_url = '/summoners'
 
 def cats_index(request):
     # Get all cats from the db
     cats = Cat.objects.all()
     return render(request, 'cats/index.html', {'cats': cats})
 
+###
+
+def summoners_index(request):
+    # Get all cats from the db
+    summoners = Summoner.objects.all()
+    return render(request, 'summoners/index.html', {'summoners': summoners})
+
+    
 def cats_show(request, cat_id):
     cat = Cat.objects.get(id=cat_id)
     toys = CatToy.objects.all()
     return render(request, 'cats/show.html', {'cat': cat, 'toys': toys})
+
+###
+
+def summoners_show(request, summoner_id):
+    summoner = Summoner.objects.get(id=summoner_id)
+    print("summoner: ", summoner)
+    return render(request, 'summoners/show.html', {'summoner': summoner})
 
 ########## CATTOYS ################
 

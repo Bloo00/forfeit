@@ -47,6 +47,9 @@ class Summoner(models.Model):
     game_lvl = models.IntegerField()
     creep_score = models.IntegerField()
 
+    def __str__(self):
+        return self.summoner_name
+
 class Match(models.Model):
     id = models.AutoField(primary_key=True)
     summoner = models.ForeignKey(Summoner,on_delete=models.CASCADE)
