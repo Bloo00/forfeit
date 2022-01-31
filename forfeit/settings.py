@@ -35,6 +35,7 @@ STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
 # Application definition
 
 INSTALLED_APPS = [
+    
     'main_app',
     'bulma',
     'django.contrib.admin',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 ]
 
 MIDDLEWARE = [
