@@ -2,9 +2,54 @@
 {% load static %}
 {% block content %}
     {% if searched %}
-        <h1>you searched {{ searched }}</h1>
         {% for s in summoner %}
-        <h1>{{ s.summoner_name }}</h1>
+        <section class="section has-background-primary-light">
+            <div class="container">
+              <div class="has-mw-4xl mx-auto has-text-centered">
+                <span class="tag is-warning is-light">{{s.summoner_lvl}}</span>
+                <h2 class="mt-6 mb-4 title is-size-2 is-spaced">{{s.summoner_name}}</h2>
+                <p class="has-mw-2xl subtitle mx-auto mb-6">summoner extrodinair</p>
+                <div class="buttons is-centered"><a class="button is-grey-light" href="#">Leave a Comment</a>
+                    <a class="button is-dark" href="#">Leave a Rateing :3</a></div>
+              </div>
+            </div>
+          </section>
+          <section class="section">
+            <div class="container">
+              <div class="is-vcentered columns is-multiline is-align-items-center">
+                <div class="column is-12 is-3-desktop is-6-tablet mb-6 mb-0-desktop">
+                  <div class="has-text-centered">
+                    <h1 class="title is-size-1 has-text-warning mb-4">{{s.solo_rank}}</h1>
+                    <p class="has-text-grey-dark">Solo Rank</p>
+                  </div>
+                </div>
+                <div class="column is-12 is-3-desktop is-6-tablet mb-6 mb-0-desktop">
+                  <div class="has-text-centered">
+                    <div class="has-text-centered">
+                      <h1 class="title is-size-1 has-text-warning mb-4">{{s.flex_rank}}</h1>
+                      <p class="has-text-grey-dark">Flex Rank</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-12 is-3-desktop is-6-tablet mb-6 mb-0-tablet">
+                  <div class="has-text-centered">
+                    <div class="has-text-centered">
+                      <h1 class="title is-size-1 has-text- mb-4">{{s.win_rate}}%</h1>
+                      <p class="has-text-grey-dark">Win Rate</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-12 is-3-desktop is-6-tablet">
+                  <div class="has-text-centered">
+                    <div class="has-text-centered">
+                      <h1 class="title is-size-1 has-text-mb-4">{{s.kills}}/{{s.deaths}}/{{s.assists}}</h1>
+                      <p class="has-text-grey-dark">k/d/a</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         {% endfor %}
     {% else %}
         <h1>you searched nothing</h1>
