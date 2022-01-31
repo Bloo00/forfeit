@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if searched %}
+        <h1>you searched {{ searched }}</h1>
+        {% for s in summoner %}
+        <h1>{{ s.summoner_name }}</h1>
+        {% endfor %}
+    {% else %}
+        <h1>you searched nothing</h1>
+    {% endif %}
+{% endblock %}

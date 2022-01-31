@@ -1,8 +1,9 @@
 from curses.ascii import HT
 from dataclasses import field
+from urllib import request
 from xml.parsers.expat import model
-from django.shortcuts import render, redirect
-from .models import Cat, CatToy, Summoner, Match, Rank 
+from django.shortcuts import render, redirect,get_object_or_404
+from .models import Cat, CatToy, Summoner, Match, Rank, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -36,7 +37,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/cats')
+    return redirect('/')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -193,7 +194,7 @@ def matches_index(request):
     return render(request, 'matches/index.html', {'matches': matches})
 
 ## Rank
-def matches_index(request):
+def ranks_index(request):
     # Get all cats from the db
     ranks = Rank.objects.all()
     return render(request, 'ranks/index.html', {'ranks': ranks})
@@ -223,7 +224,39 @@ def ranks_show(request, rank_id):
     summoner = Summoner.objects.all()
     return render(request, 'ranks/show.html', {'rank': rank,'summoner':summoner})
 
+########### DEFAULT ###################
 
+def index(request):
+    return render(request, 'index.html')
+  
+
+def about(request):
+    return render(request, 'about.html')
+
+def search_summoner(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        summoner = Summoner.objects.all().filter(summoner_name__contains=searched)
+        return render(request,"summoner/search_summoner.html",{'searched':searched,'summoner':summoner})
+    else:
+        return render(request,"summoner/search_summoner.html",{})
+
+
+######### comments/rateing #######
+
+@method_decorator(login_required, name='dispatch')
+def comment_create(request):
+    model = Comment
+    fields = ['body']
+    success_url = "/matches/"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print("self.object: ",self.object)
+        self.object.user = self.request.user
+        self.object.save()
+        self.object.author = request.user
+        return HttpResponseRedirect("/matches")
 
 ########## CATTOYS ################
 
@@ -257,11 +290,3 @@ def associate_toy(request, cat_id, toy_id):
 def unassociate_toy(request, cat_id, toy_id):
     Cat.objects.get(id=cat_id).cattoys.remove(toy_id)
     return HttpResponseRedirect('/cats/'+str(cat_id)+'/')
-
-########### DEFAULT ###################
-
-def index(request):
-    return render(request, 'index.html')
-
-def about(request):
-    return render(request, 'about.html')

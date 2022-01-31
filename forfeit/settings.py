@@ -17,7 +17,7 @@ import os
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ROOT_PATH = os.path.dirname(__file__)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -30,11 +30,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# Static files
+STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
 # Application definition
 
 INSTALLED_APPS = [
     'main_app',
+    'bulma',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +135,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+

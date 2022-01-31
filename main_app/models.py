@@ -25,6 +25,7 @@ class Cat(models.Model):
     def __str__(self):
         return self.name
 
+
 class Summoner(models.Model):
     id = models.AutoField(primary_key=True)
     summoner_name = models.CharField(max_length=36)
@@ -65,12 +66,30 @@ class Match(models.Model):
     red_towers_taken = models.IntegerField()
     red_gold_total = models.IntegerField()
 
+    def __str__(self):
+        return self.game_type
+    
+
 class Rank(models.Model):
     id = models.AutoField(primary_key=True)
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     solo_duo_rank = models.CharField(max_length=32)
+    flex_rank = models.CharField(max_length=32)
     rank_icon = models.ImageField()
-    flex_rank = models.IntegerField()
     win_count = models.IntegerField()
     loss_count = models.IntegerField()
     lp = models.IntegerField()
+
+    def __str__(self):
+        return self.solo_duo_rank
+   
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    author = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    body = models.TextField()
+    rateing = models.IntegerField()
+    def __str__(self):
+        return self.author
+    def snippet(self):
+        return self.body[:50] + '...'

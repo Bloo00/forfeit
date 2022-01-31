@@ -1,12 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <hr />
-    {% for summoner in summoners %}
-
-        <a href="/summoners/{{summoner.id}}">
-            <p>Name: {{ summoner.summoner_name }}</p>
-        </a>
-        <hr />
-    {% endfor %}
+    <section class="section">
+        <div class="container">
+          <div class="box p-0">
+            <div class="table-container">
+              <table class="table is-fullwidth">
+                <thead>
+                  <tr><th class="py-4 has-text-weight-normal">Summoner</th><th class="py-4 has-text-weight-normal">Solo Rank</th><th class="py-4 has-text-weight-normal">Flex Rank</th><th class="py-4 has-text-weight-normal">Match</th><th class="py-4 has-text-weight-normal">Rateing</th></tr>
+                </thead>
+                <tbody>
+                    {% for summoner in summoners %}
+                  <tr>
+                    <tr>
+                        <td>
+                          <img class="mr-3 is-inline-block is-32x32" src="metis-assets/logos/react.svg" alt="">
+                          <div class="is-inline-block">
+                            <span class="tag has-background-link-light has-text-primary has-text-weight-semibold is-uppercase is-rounded">{{ summoner.summoner_name }}</span>
+                            <p class="is-size-7">Level: {{ summoner.summoner_lvl }}</a>
+                          </div>
+                        </td>
+                        <td class="py-4 is-size-8 has-text-weight-semibold">{{ summoner.solo_rank }}
+                            <p class="is-size-7">{{ summoner.kills }}/{{ summoner.deaths}}/{{ summoner.assists}}</p>
+                        </td>
+                        
+                        <td class="py-4 is-size-8 has-text-weight-semibold">{{ summoner.flex_rank }}
+                            <p class="is-size-7">{{ summoner.kills }}/{{ summoner.deaths }}/{{ summoner.assists}}</p>
+                        </td>
+                        <td>
+                          <div class="py-1 is-flex">
+                            <img class="image is-32x32 is-rounded" style="object-fit: cover;" src="https://static.wikia.nocookie.net/leagueoflegends/images/2/2e/Aphelios_OriginalSquare_Alune.png/revision/latest/scale-to-width-down/30?cb=20191219134627">
+                            <img class="image is-32x32 is-rounded" style="object-fit: cover;" src="https://static.wikia.nocookie.net/leagueoflegends/images/4/46/DoranSquare.png/revision/latest/scale-to-width-down/30?cb=20211203171656">
+                            <img class="image is-32x32 is-rounded" style="object-fit: cover;" src="https://static.wikia.nocookie.net/leagueoflegends/images/c/cd/TibbersSquare.png/revision/latest/scale-to-width-down/30?cb=20140614013543">
+                            <img class="image is-32x32 is-rounded" style="object-fit: cover;" src="https://static.wikia.nocookie.net/leagueoflegends/images/9/9a/ValmarSquare.png/revision/latest/scale-to-width-down/30?cb=20171130201459">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="px-3">
+                            <p class="is-size-7 has-text-weight-semibold"></p>
+                            <div class="is-relative p-1 has-background-grey-light is-radius">
+                              <div class="is-absolute is-top is-left has-background-link is-radius" style="width: 50%; height: 100%;"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
 {% endblock %}
+

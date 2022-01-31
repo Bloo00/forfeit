@@ -1,15 +1,45 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Forfeit</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-  </head>
-  <body>
-    <h1>FF.GG</h1>
-    <hr />
-    <a href="/summoners">View All My Summoners!</a>
-    <a href="/matches">View All My Matches!</a>
-    <a href="/ranks">View All My Ranks!</a>
-    <footer>All Rights Reserved, catcollector 2018</footer>
-  </body>
+{% block content %}
+<section class="hero is-info is-fullheight">
+  <div class="hero-head">
+      <nav class="navbar">
+          <div class="container">
+              <div class="navbar-brand">
+s                  <span class="navbar-burger burger" data-target="navbarMenu">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </span>
+              </div>
+              
+          </div>
+      </nav>
+      </div>
+
+      <div class="hero-body">
+          <div class="container has-text-centered">
+              <div class="column is-6 is-offset-3">
+                  <h1 class="title">
+                      FORFEIT.GG
+                  </h1>
+                  <h2 class="subtitle">
+                  </h2>
+                  <div class="box">
+                      <div class="field is-grouped">
+                          <p class="control is-expanded">
+                              <input class="input" type="text" placeholder="Enter your email">
+                          </p>
+                          <p class="control">
+                              <a class="button is-info">
+                                  Notify Me
+                              </a>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+</section>
+{% endblock %}

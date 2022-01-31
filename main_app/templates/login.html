@@ -1,11 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Login" />
-</form>
-
+<section class="section py-16-desktop is-clipped is-relative">
+    <div class="container">
+      <div class="columns is-align-items-center is-justify-content-space-between">
+        <div class="column is-5 is-4-desktop is-5-widescreen mb-12 mb-0-tablet">
+          <div class="pr-5-widescreen">
+            <small class="mb-2 is-block is-uppercase has-text-weight-semibold">Sign in</small>
+            <h2 class="title has-mw-xs">Welcome!</h2>
+            
+            <form method='post'>
+                <div class="field mb-4">
+                    <label class="label"><small>E-mail address</small></label>
+                    <div class="control">
+                        {% csrf_token %}
+                      <input class="input" type="text" placeholder="Type e-mail" {{form.username}}>
+                    </div>
+                  </div>
+                  <div class="field mb-4">
+                    <label class="label"><small>Password</small></label>
+                    <div class="control">
+                        {% csrf_token %}
+                      <input class="input" type="password" placeholder="Type password" {{form.password}}>
+                    </div>
+                  </div>
+                  <div class="field mb-0">
+                    <div class="control">
+                      <button class="button is-primary is-fullwidth">Sign in</button>
+                    </div>
+                  </div>
+                  <button class="button has-text-grey-darker has-text-weight-normal py-9 is-fullwidth" href="#" style="box-shadow: none; border: none;">Forgot password</button>
+            </form> 
+          </div>
+        </div>
+        <div class="column is-narrow-desktop is-relative py-0 is-hidden-desktop is-clipped">
+          <div class="is-absolute is-bottom-0 p-8-mobile p-14-tablet p-20-desktop" style="z-index: 1;">
+            <h2 class="title has-text-white mb-4 has-mw-sm">Lorem ipsum dolor sit amet consectutar domor at elis</h2>
+            <p class="subtitle has-text-white is-hidden-mobile">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa nibh, pulvinar vitae aliquet nec, accumsan aliquet orci.</p>
+          </div>
+          <img class="image ml-auto-tablet" src="acros-assets/images/forms/work.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="is-absolute is-top-0 is-right-0 is-hidden-touch">
+      <div class="is-absolute is-bottom-0 p-8-mobile p-14-tablet p-20-desktop" style="z-index: 1;">
+        <h2 class="title has-text-white mb-4 has-mw-sm">Come join us</h2>
+        <p class="subtitle has-text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa nibh, pulvinar vitae aliquet nec, accumsan aliquet orci.</p>
+      </div>
+      <img class="image ml-auto-tablet" src="acros-assets/images/forms/work.jpg" alt="">
+    </div>
+  </section>
 {% endblock %}

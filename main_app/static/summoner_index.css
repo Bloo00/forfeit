@@ -1,0 +1,29 @@
+.pfp {
+    display: block;
+    width:  100px;
+    height: 100px;
+}
+
+.img {
+    border: 0;
+}
+
+.lvl {
+    background-color: blue;
+}
+
+.name {
+    background-color: lime;
+}
+
+.solo {
+    background-color: blue;
+}
+
+.flex {
+    background-color: lime;
+}
+
+.win_rate {
+    background-color: blue;
+}

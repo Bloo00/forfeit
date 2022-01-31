@@ -27,4 +27,20 @@ urlpatterns = [
     path('summoners/create/', views.SummonerCreate.as_view(), name='summoners_create'),
     path('summoners/<int:pk>/update/', views.SummonerUpdate.as_view(), name='summoners_update'),
     path('summoners/<int:pk>/delete/', views.SummonerDelete.as_view(), name='summoners_delete'),
+
+
+    path('matches/', views.matches_index, name='matches_index'),
+    path('matches/<int:match_id>/',views.matches_show, name='matches_show'),
+    path('matches/create/', views.MatchCreate.as_view(), name='matches_create'),
+    path('matches/<int:pk>/update/', views.MatchUpdate.as_view(), name='matches_update'),
+    path('matches/<int:pk>/delete/', views.MatchDelete.as_view(), name='matches_delete'),
+
+
+    path('ranks/', views.ranks_index, name='ranks_index'),
+    path('ranks/<int:rank_id>/',views.ranks_show, name='ranks_show'),
+    path('ranks/create/', views.RankCreate.as_view(), name='ranks_create'),
+    path('ranks/<int:pk>/update/', views.RankUpdate.as_view(), name='ranks_update'),
+
+    path('search_summoner', views.search_summoner, name='search_summoner'),
+
 ]
