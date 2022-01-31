@@ -53,15 +53,15 @@
               <div class="navbar-start ml-auto mr-0">
                 <a class="navbar-item" href="/">Home</a></div>
                 <a class="navbar-item" href="/summoners">Summoners</a>
-                <a class="navbar-item" href="/matches">Match</a>
+                <!-- <a class="navbar-item" href="/matches">Match</a> -->
               <div class="navbar-end ml-0">
                 {% if user.is_authenticated %}
                 <div class="navbar-item">
-                    <div class="buttons"><p class="button is-primary is-outlined">Hello {{user.username}}</p><a class="button is-primary" href="{% url 'logout' %}">Log out</a></div>
+                    <div class="buttons"><p class="button is-gray is-outlined">Hello {{user.username}}</p><a class="button is-gray" href="{% url 'logout' %}">Log out</a></div>
                 </div>
                 {% else %}
                 <div class="navbar-item">
-                    <div class="buttons"><a class="button is-primary is-outlined" href="{% url 'login' %}">Log In</a><a class="button is-primary" href="{% url 'signup' %}">Sign Up</a></div>
+                    <div class="buttons"><a class="button is-gray is-outlined" href="{% url 'login' %}">Log In</a><a class="button is-gray" href="{% url 'signup' %}">Sign Up</a></div>
                 </div>
                 {% endif %}
                 
